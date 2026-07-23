@@ -217,7 +217,11 @@ async function loadLeads(){
   try{
     const r = await fetch(scriptUrl + "?action=list");
     const data = await r.json();
-    leads = (data.leads||[]).map(l=>({...l, budget:Number(l.budget)||0}));
+    const normDate = s => { if(!s) return ""; s=String(s); if(/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+      const d=new Date(s); return isNaN(d)?"":d.toLocaleDateString("en-CA",{timeZone:"Asia/Kolkata"}); };
+    const normPhone = p => { p=String(p||"").trim(); return !p?"":(p.startsWith("+")?p:"+"+p.replace(/[^\d]/g,"")); };
+    leads = (data.leads||[]).map(l=>({...l, budget:Number(l.budget)||0, phone:normPhone(l.phone),
+      dateAdded:normDate(l.dateAdded), nextFollowUp:normDate(l.nextFollowUp), lastContact:normDate(l.lastContact)}));
     saveLocal();
     setSync("Synced with Google Sheet · " + new Date().toLocaleTimeString());
   }catch(e){
