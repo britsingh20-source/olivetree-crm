@@ -1,71 +1,373 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Olivetree Interiors — Lead CRM</title>
 <style>
-:root{--bg:#f4f6f9;--card:#fff;--ink:#182532;--muted:#6b7a8c;--brand:#1f6f43;--brand2:#2e9960;--red:#d64545;--amber:#dc8b12;--blue:#3272c9;--line:#e7ebf0;--radius:14px;--shadow:0 2px 12px rgba(16,32,48,.08)}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink)}header{background:var(--brand);color:#fff;padding:14px 18px;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.title{font-weight:800}.sub{font-size:.76rem;opacity:.85}.btn{border:0;border-radius:9px;padding:9px 13px;font-weight:700;cursor:pointer}.btn-light{background:rgba(255,255,255,.16);color:#fff}.btn-primary{background:var(--brand);color:#fff}.btn-ghost{background:#eef1f5;color:var(--ink)}.wrap{max-width:1280px;margin:auto;padding:18px}.tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}.tab{background:#e8edf2;border:0;border-radius:999px;padding:9px 14px;font-weight:700;cursor:pointer}.tab.active{background:var(--brand);color:#fff}.panel{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:16px}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px}.stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px}.stat .n{font-size:1.55rem;font-weight:800}.stat .l{font-size:.74rem;color:var(--muted)}.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}input,select,textarea{border:1px solid #d4dce5;border-radius:9px;padding:8px 10px;font:inherit;font-size:.86rem;background:#fff}table{width:100%;border-collapse:collapse;font-size:.83rem}th,td{padding:9px 8px;border-bottom:1px solid #edf0f4;text-align:left;vertical-align:top}th{font-size:.72rem;text-transform:uppercase;color:var(--muted)}.pill{display:inline-block;border-radius:999px;padding:3px 9px;background:#e8eef6;font-size:.72rem;font-weight:700}.caller-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}.caller-card{border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;background:#fff}.caller-card:hover{border-color:#a9cdb9}.caller-name{font-weight:800;font-size:1rem}.caller-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.mini{background:#f6f8fa;border-radius:10px;padding:9px;text-align:center}.mini b{display:block;font-size:1.15rem}.mini span{font-size:.68rem;color:var(--muted)}.activity{border-left:3px solid #dfe7ee;padding:8px 10px;margin:8px 0;background:#fafbfd;border-radius:0 8px 8px 0}.activity .time{font-size:.7rem;color:var(--muted)}.activity .main{font-size:.83rem;font-weight:650}.activity .change{font-size:.76rem;color:#4f5f70;margin-top:3px}.empty{padding:16px;text-align:center;color:var(--muted)}.hidden{display:none!important}.modal-bg{position:fixed;inset:0;background:rgba(10,20,30,.45);display:none;align-items:center;justify-content:center;padding:16px;z-index:20}.modal-bg.open{display:flex}.modal{background:#fff;width:min(580px,100%);max-height:92vh;overflow:auto;border-radius:16px;padding:18px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}.field label{font-size:.72rem;color:var(--muted);font-weight:700}.actions{display:flex;justify-content:flex-end;gap:8px}.monitor-note{font-size:.78rem;color:var(--muted);margin-top:4px}.role-badge{font-size:.7rem;background:rgba(255,255,255,.18);padding:3px 8px;border-radius:999px}.danger{color:var(--red)}
-@media(max-width:700px){.hide-m{display:none}.grid2{grid-template-columns:1fr}.caller-metrics{grid-template-columns:repeat(2,1fr)}}
+  :root{
+    --bg:#f4f6f9; --card:#ffffff; --ink:#1c2733; --muted:#6b7a8c;
+    --brand:#1f6f43; --brand-2:#2e9960; --accent:#e8f5ee;
+    --red:#d64545; --amber:#e09b1a; --blue:#3272c9;
+    --radius:14px; --shadow:0 1px 3px rgba(16,32,48,.08),0 4px 14px rgba(16,32,48,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  header{background:var(--brand);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  header h1{font-size:1.15rem;font-weight:600}
+  header .sub{font-size:.75rem;opacity:.85}
+  .hbtns{display:flex;gap:8px}
+  .btn{border:0;border-radius:9px;padding:9px 14px;font-size:.85rem;font-weight:600;cursor:pointer;transition:.15s}
+  .btn-light{background:rgba(255,255,255,.15);color:#fff}
+  .btn-light:hover{background:rgba(255,255,255,.28)}
+  .btn-primary{background:var(--brand);color:#fff}
+  .btn-primary:hover{background:var(--brand-2)}
+  .btn-ghost{background:#eef1f5;color:var(--ink)}
+  .btn-wa{background:#25d366;color:#fff;padding:6px 10px;border-radius:8px;font-size:.78rem;text-decoration:none;display:inline-flex;align-items:center;gap:5px;font-weight:600}
+  .wrap{max-width:1200px;margin:0 auto;padding:18px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
+  .stat{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px}
+  .stat .n{font-size:1.6rem;font-weight:700}
+  .stat .l{font-size:.75rem;color:var(--muted);margin-top:2px}
+  .stat.due .n{color:var(--red)}
+  .stat.hot .n{color:var(--amber)}
+  .stat.won .n{color:var(--brand)}
+  .panel{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:18px}
+  .panel h2{font-size:.95rem;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .badge{background:var(--red);color:#fff;border-radius:20px;font-size:.7rem;padding:2px 9px}
+  .due-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border:1px solid #edf0f4;border-left:4px solid var(--red);border-radius:10px;margin-bottom:8px;flex-wrap:wrap}
+  .due-item.today{border-left-color:var(--amber)}
+  .due-item .who{font-weight:600;font-size:.9rem}
+  .due-item .meta{font-size:.75rem;color:var(--muted)}
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+  select,input,textarea{border:1px solid #d6dde6;border-radius:9px;padding:8px 10px;font-size:.85rem;font-family:inherit;background:#fff;color:var(--ink)}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--brand-2);border-color:transparent}
+  table{width:100%;border-collapse:collapse;font-size:.84rem}
+  th{text-align:left;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;padding:8px;border-bottom:2px solid #edf0f4}
+  td{padding:9px 8px;border-bottom:1px solid #f0f3f7;vertical-align:middle}
+  tr:hover td{background:#fafbfd}
+  .stage-pill{border-radius:20px;padding:3px 10px;font-size:.72rem;font-weight:600;border:0;cursor:pointer}
+  .st-New{background:#e3edfb;color:#2a5fa8}.st-Contacted{background:#e8f0fe;color:#3272c9}
+  .st-SiteVisitBooked{background:#fff2d9;color:#a8720a}.st-SiteVisitDone{background:#ffe9cc;color:#9c5f00}
+  .st-QuoteSent{background:#f3e8fd;color:#7a3fc0}.st-Negotiation{background:#fde8e8;color:#c03a3a}
+  .st-Won{background:#e0f5e9;color:#1f6f43}.st-Lost{background:#eceff3;color:#7a8798}
+  .overdue{color:var(--red);font-weight:700}
+  .todaytx{color:var(--amber);font-weight:700}
+  .modal-bg{position:fixed;inset:0;background:rgba(12,24,36,.45);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}
+  .modal-bg.open{display:flex}
+  .modal{background:#fff;border-radius:16px;max-width:520px;width:100%;max-height:92vh;overflow:auto;padding:20px}
+  .modal h3{margin-bottom:14px;font-size:1rem}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .field{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+  .field label{font-size:.72rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+  .modal .actions{display:flex;justify-content:flex-end;gap:8px;margin-top:8px}
+  .sync{font-size:.72rem;color:var(--muted)}
+  .sync.err{color:var(--red)}
+  .empty{color:var(--muted);font-size:.85rem;padding:14px;text-align:center}
+  .icon-btn{border:0;background:transparent;cursor:pointer;font-size:.95rem;padding:4px}
+  .setup-note{background:var(--accent);border:1px solid #cbe7d7;border-radius:10px;padding:12px;font-size:.82rem;margin-bottom:14px;display:none}
+  .setup-note.show{display:block}
+  @media(max-width:700px){
+    .hide-m{display:none}
+    .grid2{grid-template-columns:1fr}
+  }
 </style>
 </head>
 <body>
 <header>
-  <div><div class="title">🏠 Olivetree Interiors — Lead CRM</div><div class="sub" id="syncStatus">Loading…</div></div>
-  <div style="display:flex;gap:8px;align-items:center"><span class="role-badge" id="roleBadge"></span><button class="btn btn-light" onclick="loadAll()">⟳ Refresh</button><button class="btn btn-light" onclick="openSettings()">⚙ Settings</button><button class="btn btn-light" onclick="openLead()">＋ Lead</button></div>
+  <div>
+    <h1>🏠 Olivetree Interiors — Lead CRM</h1>
+    <div class="sub" id="syncStatus">Loading…</div>
+  </div>
+  <div class="hbtns">
+    <button class="btn btn-light" onclick="loadLeads()">⟳ Refresh</button>
+    <button class="btn btn-light" onclick="openSettings()">⚙ Settings</button>
+    <button class="btn btn-light" style="background:#fff;color:var(--brand)" onclick="openLeadModal()">＋ Add Lead</button>
+  </div>
 </header>
+
 <div class="wrap">
-  <div class="tabs"><button class="tab active" id="tabLeads" onclick="showTab('leads')">Leads</button><button class="tab" id="tabMonitor" onclick="showTab('monitor')">Telecaller Monitoring</button></div>
+  <div class="setup-note" id="setupNote">
+    <b>One-time setup:</b> click <b>⚙ Settings</b> and paste your Google Apps Script Web App URL to connect your Google Sheet.
+  </div>
 
-  <section id="leadsView">
-    <div class="stats" style="margin-bottom:16px"><div class="stat"><div class="n" id="stTotal">0</div><div class="l">Total leads</div></div><div class="stat"><div class="n" id="stOpen">0</div><div class="l">Open</div></div><div class="stat"><div class="n" id="stDue">0</div><div class="l">Follow-ups due</div></div><div class="stat"><div class="n" id="stWon">0</div><div class="l">Won / Closed</div></div></div>
-    <div class="panel"><div class="toolbar"><select id="stageFilter" onchange="renderLeads()"><option value="">All stages</option></select><input id="search" type="search" placeholder="Search name / phone / notes…" oninput="renderLeads()" style="flex:1;min-width:180px"></div><div style="overflow:auto"><table><thead><tr><th>Name</th><th>Phone</th><th>Stage</th><th class="hide-m">Assigned to</th><th>Follow-up</th><th></th></tr></thead><tbody id="leadRows"></tbody></table></div><div class="empty hidden" id="leadEmpty">No leads found.</div></div>
-  </section>
+  <div class="stats">
+    <div class="stat"><div class="n" id="stTotal">0</div><div class="l">Open leads</div></div>
+    <div class="stat due"><div class="n" id="stDue">0</div><div class="l">Follow-ups due</div></div>
+    <div class="stat hot"><div class="n" id="stHot">0</div><div class="l">Quote / Negotiation</div></div>
+    <div class="stat won"><div class="n" id="stWonV">₹0</div><div class="l">Won value</div></div>
+    <div class="stat"><div class="n" id="stPipeV">₹0</div><div class="l">Pipeline value</div></div>
+  </div>
 
-  <section id="monitorView" class="hidden">
-    <div class="panel">
-      <div class="toolbar"><b>Day-by-day performance</b><input type="date" id="perfDate" onchange="loadPerformance()"><button class="btn btn-ghost" onclick="setPerfDate(0)">Today</button><button class="btn btn-ghost" onclick="setPerfDate(-1)">Yesterday</button></div>
-      <div class="monitor-note">Manager, Administrator and Director can view every telecaller's daily history. Counts are generated from immutable timestamped activity logs, so yesterday's report does not change when a lead changes later.</div>
+  <div class="panel">
+    <h2>🔔 Follow-ups due <span class="badge" id="dueBadge">0</span></h2>
+    <div id="dueList"><div class="empty">Nothing due. Nice.</div></div>
+  </div>
+
+  <div class="panel">
+    <h2>📋 All leads</h2>
+    <div class="toolbar">
+      <select id="fStage" onchange="render()">
+        <option value="">All stages</option>
+      </select>
+      <input type="search" id="fSearch" placeholder="Search name / phone / area…" oninput="render()" style="flex:1;min-width:160px">
     </div>
-    <div class="caller-grid" id="callerGrid"></div>
-    <div class="panel hidden" id="callerDetail"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap"><h3 id="detailTitle" style="margin:0"></h3><button class="btn btn-ghost" onclick="closeDetail()">Close</button></div><div class="stats" id="detailStats" style="margin:12px 0"></div><h4>Exact numbers handled / spoken</h4><div style="overflow:auto"><table><thead><tr><th>Time</th><th>Phone</th><th>Name</th><th>Activity</th><th>Details changed</th></tr></thead><tbody id="activityRows"></tbody></table></div></div>
-  </section>
+    <div style="overflow-x:auto">
+    <table>
+      <thead><tr>
+        <th>Name</th><th class="hide-m">Phone</th><th>Stage</th><th>Next follow-up</th>
+        <th class="hide-m">Service</th><th class="hide-m">Budget</th><th></th>
+      </tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    </div>
+    <div class="empty" id="emptyRow" style="display:none">No leads yet — click ＋ Add Lead.</div>
+  </div>
 </div>
 
-<div class="modal-bg" id="leadModal"><div class="modal"><h3 id="leadTitle">Add lead</h3><input id="mId" type="hidden"><div class="grid2"><div class="field"><label>Name</label><input id="mName"></div><div class="field"><label>Phone</label><input id="mPhone"></div></div><div class="grid2"><div class="field"><label>Stage</label><select id="mStage"></select></div><div class="field"><label>Assigned telecaller</label><input id="mAssigned" placeholder="Telecaller 1"></div></div><div class="grid2"><div class="field"><label>Next follow-up</label><input id="mNext" type="date"></div><div class="field"><label>Last contact</label><input id="mLast" type="date"></div></div><div class="field"><label>Notes</label><textarea id="mNotes" rows="4"></textarea></div><div class="actions"><button class="btn btn-ghost" onclick="closeModal('leadModal')">Cancel</button><button class="btn btn-primary" onclick="saveLead()">Save</button></div></div></div>
+<!-- Lead modal -->
+<div class="modal-bg" id="leadModal">
+  <div class="modal">
+    <h3 id="leadModalTitle">Add lead</h3>
+    <input type="hidden" id="mId">
+    <div class="grid2">
+      <div class="field"><label>Name *</label><input id="mName"></div>
+      <div class="field"><label>WhatsApp number *</label><input id="mPhone" placeholder="+91XXXXXXXXXX"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Source</label>
+        <select id="mSource"><option>Meta Ad</option><option>Instagram</option><option>Referral</option><option>Walk-in</option><option>Google</option><option>Other</option></select>
+      </div>
+      <div class="field"><label>Stage</label><select id="mStage"></select></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Service needed</label><input id="mService" placeholder="Full home interiors"></div>
+      <div class="field"><label>Est. budget (₹)</label><input id="mBudget" type="number" min="0"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Next follow-up</label><input id="mNext" type="date"></div>
+      <div class="field"><label>Last contact</label><input id="mLast" type="date"></div>
+    </div>
+    <div class="field"><label>Notes</label><textarea id="mNotes" rows="3" placeholder="Area, home type, preferences…"></textarea></div>
+    <div class="actions">
+      <button class="btn btn-ghost" onclick="closeModal('leadModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveLead()">Save</button>
+    </div>
+  </div>
+</div>
 
-<div class="modal-bg" id="callModal"><div class="modal"><h3>Record call activity</h3><input id="cLeadId" type="hidden"><div class="field"><label>Outcome</label><select id="cOutcome"><option>Spoken</option><option>No Response</option><option>Busy</option><option>Call Back Requested</option></select></div><div class="field"><label>Call note</label><textarea id="cNote" rows="3"></textarea></div><div class="actions"><button class="btn btn-ghost" onclick="closeModal('callModal')">Cancel</button><button class="btn btn-primary" onclick="saveCall()">Record call</button></div></div></div>
-
-<div class="modal-bg" id="settingsModal"><div class="modal"><h3>Settings</h3><div class="field"><label>Apps Script Web App URL</label><input id="sUrl"></div><div class="grid2"><div class="field"><label>Your name / login</label><input id="sActor" placeholder="Telecaller 1"></div><div class="field"><label>Role</label><select id="sRole"><option value="telecaller">Telecaller</option><option value="manager">Manager</option><option value="administrator">Administrator</option><option value="director">Director</option></select></div></div><div class="actions"><button class="btn btn-ghost" onclick="closeModal('settingsModal')">Cancel</button><button class="btn btn-primary" onclick="saveSettings()">Save</button></div></div></div>
+<!-- Settings modal -->
+<div class="modal-bg" id="settingsModal">
+  <div class="modal">
+    <h3>Settings</h3>
+    <div class="field">
+      <label>Google Apps Script Web App URL</label>
+      <input id="sUrl" placeholder="https://script.google.com/macros/s/…/exec">
+    </div>
+    <p style="font-size:.78rem;color:var(--muted);margin-bottom:10px">
+      This connects the dashboard to your Google Sheet. Deploy the provided Code.gs as a Web App
+      (Execute as: Me · Access: Anyone) and paste the URL here.
+    </p>
+    <div class="actions">
+      <button class="btn btn-ghost" onclick="closeModal('settingsModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveSettings()">Save & connect</button>
+    </div>
+  </div>
+</div>
 
 <script>
-const STAGES=['New','Contacted','Hot','Follow-up','Site Visit Booked','Site Visit Done','Quote Sent','Negotiation','Won','Closed','Lost'];
-let leads=[], performance=[];
-let scriptUrl=localStorage.getItem('olv_script_url')||'';
-let actor=localStorage.getItem('olv_actor')||'Director';
-let role=localStorage.getItem('olv_role')||'director';
-const $=id=>document.getElementById(id); const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function localDate(d=new Date()){return d.toLocaleDateString('en-CA',{timeZone:'Asia/Kolkata'})}
-function canMonitor(){return ['manager','administrator','admin','director'].includes(String(role).toLowerCase())}
-(function init(){STAGES.forEach(s=>{$('stageFilter').add(new Option(s,s));$('mStage').add(new Option(s,s))});$('perfDate').value=localDate();applyRole();loadAll()})();
-function applyRole(){$('roleBadge').textContent=`${actor} · ${role}`;$('tabMonitor').classList.toggle('hidden',!canMonitor())}
-function setSync(t){$('syncStatus').textContent=t}
-function apiUrl(params={}){const u=new URL(scriptUrl);Object.entries(params).forEach(([k,v])=>u.searchParams.set(k,v));return u.toString()}
-async function loadAll(){if(!scriptUrl){setSync('Configure Apps Script URL in Settings');leads=JSON.parse(localStorage.getItem('olv_leads')||'[]');renderLeads();return}setSync('Syncing…');try{const r=await fetch(apiUrl({action:'list'}));const d=await r.json();leads=d.leads||[];localStorage.setItem('olv_leads',JSON.stringify(leads));renderLeads();if(canMonitor())await loadPerformance();setSync('Synced · '+new Date().toLocaleTimeString())}catch(e){setSync('Sync failed · showing cached leads');leads=JSON.parse(localStorage.getItem('olv_leads')||'[]');renderLeads()}}
-function showTab(t){$('leadsView').classList.toggle('hidden',t!=='leads');$('monitorView').classList.toggle('hidden',t!=='monitor');$('tabLeads').classList.toggle('active',t==='leads');$('tabMonitor').classList.toggle('active',t==='monitor');if(t==='monitor')loadPerformance()}
-function renderLeads(){const q=$('search').value.toLowerCase(),sf=$('stageFilter').value;const rows=leads.filter(l=>(!sf||l.stage===sf)&&(!q||[l.name,l.phone,l.notes,l.assignedTo].join(' ').toLowerCase().includes(q)));$('stTotal').textContent=leads.length;$('stOpen').textContent=leads.filter(l=>!['Won','Closed','Lost'].includes(l.stage)).length;$('stDue').textContent=leads.filter(l=>l.nextFollowUp&&l.nextFollowUp<=localDate()&&!['Won','Closed','Lost'].includes(l.stage)).length;$('stWon').textContent=leads.filter(l=>['Won','Closed'].includes(l.stage)).length;$('leadRows').innerHTML=rows.map(l=>`<tr><td><b>${esc(l.name||'Unnamed')}</b></td><td>${esc(l.phone)}</td><td><span class="pill">${esc(l.stage||'New')}</span></td><td class="hide-m">${esc(l.assignedTo||'—')}</td><td>${esc(l.nextFollowUp||'—')}</td><td style="white-space:nowrap"><button class="btn btn-ghost" onclick="openCall('${esc(l.id)}')">☎ Call</button> <button class="btn btn-ghost" onclick="openLead('${esc(l.id)}')">Edit</button></td></tr>`).join('');$('leadEmpty').classList.toggle('hidden',rows.length>0)}
-function openLead(id=''){const l=leads.find(x=>String(x.id)===String(id))||{stage:'New'};$('mId').value=l.id||'';$('leadTitle').textContent=id?'Edit lead':'Add lead';$('mName').value=l.name||'';$('mPhone').value=l.phone||'';$('mStage').value=l.stage||'New';$('mAssigned').value=l.assignedTo||'';$('mNext').value=l.nextFollowUp||'';$('mLast').value=l.lastContact||'';$('mNotes').value=l.notes||'';$('leadModal').classList.add('open')}
-async function saveLead(){const id=$('mId').value||('L'+Date.now());const old=leads.find(x=>String(x.id)===String(id))||{};const lead={...old,id,dateAdded:old.dateAdded||localDate(),name:$('mName').value.trim(),phone:$('mPhone').value.trim(),stage:$('mStage').value,assignedTo:$('mAssigned').value.trim(),nextFollowUp:$('mNext').value,lastContact:$('mLast').value,notes:$('mNotes').value.trim(),updatedBy:actor};if(!lead.phone){alert('Phone is required');return}const i=leads.findIndex(x=>String(x.id)===String(id));const action=i<0?'add':'update';if(i<0)leads.push(lead);else leads[i]=lead;closeModal('leadModal');renderLeads();await post({action,lead,actor,actorRole:role});if(canMonitor())loadPerformance()}
-function openCall(id){$('cLeadId').value=id;$('cOutcome').value='Spoken';$('cNote').value='';$('callModal').classList.add('open')}
-async function saveCall(){const l=leads.find(x=>String(x.id)===String($('cLeadId').value));if(!l)return;const outcome=$('cOutcome').value;closeModal('callModal');await post({action:'logCall',lead:l,callOutcome:outcome,notes:$('cNote').value,actor,actorRole:role});if(outcome==='Spoken'){l.lastContact=localDate();await post({action:'update',lead:l,actor,actorRole:role})}if(canMonitor())loadPerformance();setSync('Call activity recorded')}
-async function post(body){if(!scriptUrl){localStorage.setItem('olv_leads',JSON.stringify(leads));return}await fetch(scriptUrl,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(body)})}
-function setPerfDate(delta){const d=new Date();d.setDate(d.getDate()+delta);$('perfDate').value=localDate(d);loadPerformance()}
-async function loadPerformance(){if(!canMonitor()||!scriptUrl)return;const date=$('perfDate').value||localDate();try{const r=await fetch(apiUrl({action:'performance',date,role}));const d=await r.json();performance=d.performance||[];renderPerformance()}catch(e){$('callerGrid').innerHTML='<div class="empty">Could not load monitoring data.</div>'}}
-function renderPerformance(){const grid=$('callerGrid');if(!performance.length){grid.innerHTML='<div class="panel empty">No recorded telecaller activity for this date yet.</div>';return}grid.innerHTML=performance.map((p,i)=>`<div class="caller-card" onclick="openCaller(${i})"><div class="caller-name">${esc(p.actor)}</div><div class="monitor-note">${esc(p.date)}</div><div class="caller-metrics"><div class="mini"><b>${p.callActivities||0}</b><span>Call activities</span></div><div class="mini"><b>${p.uniqueCustomersSpoken||0}</b><span>Unique spoken</span></div><div class="mini"><b>${p.editedLeads||0}</b><span>Edits</span></div><div class="mini"><b>${p.followUp||0}</b><span>Follow-ups</span></div><div class="mini"><b>${p.siteVisit||0}</b><span>Site visits</span></div><div class="mini"><b>${p.noResponse||0}</b><span>No response</span></div></div></div>`).join('')}
-async function openCaller(i){const p=performance[i];$('detailTitle').textContent=`${p.actor} — ${p.date}`;$('detailStats').innerHTML=`<div class="stat"><div class="n">${p.callActivities||0}</div><div class="l">Call activities</div></div><div class="stat"><div class="n">${p.uniqueCustomersSpoken||0}</div><div class="l">Unique customers spoken</div></div><div class="stat"><div class="n">${p.editedLeads||0}</div><div class="l">Lead edits</div></div><div class="stat"><div class="n">${p.noResponse||0}</div><div class="l">No response</div></div>`;const r=await fetch(apiUrl({action:'activity',date:p.date,actor:p.actor,role}));const d=await r.json();const acts=d.activities||[];$('activityRows').innerHTML=acts.map(a=>`<tr><td>${esc(String(a.timestamp||'').split('T')[1]||a.timestamp||'')}</td><td>${esc(a.phone||'—')}</td><td>${esc(a.name||'—')}</td><td>${esc(a.eventType)}${a.callOutcome?` · ${esc(a.callOutcome)}`:''}</td><td>${a.field?`${esc(a.field)}: ${esc(a.oldValue||'—')} → ${esc(a.newValue||'—')}`:esc(a.notes||'—')}</td></tr>`).join('')||'<tr><td colspan="5" class="empty">No activities.</td></tr>';$('callerDetail').classList.remove('hidden');$('callerDetail').scrollIntoView({behavior:'smooth'})}
-function closeDetail(){$('callerDetail').classList.add('hidden')}
-function openSettings(){$('sUrl').value=scriptUrl;$('sActor').value=actor;$('sRole').value=role;$('settingsModal').classList.add('open')}
-function saveSettings(){scriptUrl=$('sUrl').value.trim();actor=$('sActor').value.trim()||'User';role=$('sRole').value;localStorage.setItem('olv_script_url',scriptUrl);localStorage.setItem('olv_actor',actor);localStorage.setItem('olv_role',role);closeModal('settingsModal');applyRole();loadAll()}
-function closeModal(id){$(id).classList.remove('open')}
+const STAGES = ["New","Contacted","Site Visit Booked","Site Visit Done","Quote Sent","Negotiation","Won","Lost"];
+const TEMPLATES = {
+  "New": "Hi {name}! Thanks for reaching out to Olivetree Interiors 🏠 We do complete home interiors in Coimbatore — false ceiling, modular kitchen, wardrobes & more. May I know: 1) New home or renovation? 2) 2BHK/3BHK/villa? 3) Which area in Coimbatore?",
+  "Contacted": "Hi {name}! The best next step is a FREE site visit + design consultation — no charges, no obligation. We measure, understand your taste, and give a clear quote. Would tomorrow or the day after work for you?",
+  "Site Visit Booked": "Hi {name}, reminder: our team visits your home for the free consultation as planned. Please keep access ready. See you! — Olivetree Interiors",
+  "Site Visit Done": "Thank you for your time, {name}! We're preparing your detailed quote with 3D design references — you'll have it shortly. Any specific brands or finishes you'd like included?",
+  "Quote Sent": "Hi {name}, did you get a chance to go through the quote? Happy to walk you through it on a call, or adjust the scope to fit your budget. What did you think?",
+  "Negotiation": "Hi {name}! We're planning next month's project slots and would love to reserve one for your home. Shall we finalise the package together?",
+  "Won": "Welcome to the Olivetree family, {name}! 🎉 Next steps: 1) Advance & agreement 2) Final 3D designs 3) Work begins. I'm available anytime on this number.",
+  "Lost": "Hi {name}! Hope you're doing well. We recently completed a beautiful home nearby — if your interior plan is back on track, we'd love to help. 🏠"
+};
+
+let leads = [];
+let scriptUrl = localStorage.getItem("olv_script_url") || "";
+
+const $ = id => document.getElementById(id);
+const todayStr = () => new Date().toISOString().slice(0,10);
+const fmtINR = n => "₹" + (Number(n)||0).toLocaleString("en-IN");
+const stClass = s => "st-" + String(s||"New").replace(/ /g,"");
+const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+// ---------- init ----------
+(function init(){
+  const sel = $("mStage"), f = $("fStage");
+  STAGES.forEach(s=>{ sel.add(new Option(s,s)); f.add(new Option(s,s)); });
+  if(!scriptUrl){ $("setupNote").classList.add("show"); setSync("Not connected — open Settings","err"); loadLocal(); }
+  else loadLeads();
+})();
+
+function setSync(msg, cls){ const el=$("syncStatus"); el.textContent=msg; el.className="sync"+(cls?" "+cls:""); }
+
+// ---------- data ----------
+function loadLocal(){ try{ leads = JSON.parse(localStorage.getItem("olv_leads")||"[]"); }catch(e){ leads=[]; } render(); }
+function saveLocal(){ localStorage.setItem("olv_leads", JSON.stringify(leads)); }
+
+async function loadLeads(){
+  if(!scriptUrl){ loadLocal(); return; }
+  setSync("Syncing…");
+  try{
+    const r = await fetch(scriptUrl + "?action=list");
+    const data = await r.json();
+    const normDate = s => { if(!s) return ""; s=String(s); if(/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+      const d=new Date(s); return isNaN(d)?"":d.toLocaleDateString("en-CA",{timeZone:"Asia/Kolkata"}); };
+    const normPhone = p => { p=String(p||"").trim(); return !p?"":(p.startsWith("+")?p:"+"+p.replace(/[^\d]/g,"")); };
+    leads = (data.leads||[]).map(l=>({...l, budget:Number(l.budget)||0, phone:normPhone(l.phone),
+      dateAdded:normDate(l.dateAdded), nextFollowUp:normDate(l.nextFollowUp), lastContact:normDate(l.lastContact)}));
+    saveLocal();
+    setSync("Synced with Google Sheet · " + new Date().toLocaleTimeString());
+  }catch(e){
+    setSync("Sync failed — showing last saved data","err");
+    loadLocal(); return;
+  }
+  render();
+}
+
+async function pushLead(action, lead){
+  if(!scriptUrl) { saveLocal(); return; }
+  setSync("Saving…");
+  try{
+    // text/plain avoids CORS preflight with Apps Script
+    await fetch(scriptUrl, {method:"POST", headers:{"Content-Type":"text/plain"}, body: JSON.stringify({action, lead})});
+    setSync("Saved to Google Sheet · " + new Date().toLocaleTimeString());
+  }catch(e){ setSync("Save failed — kept locally, will show on refresh","err"); }
+  saveLocal();
+}
+
+// ---------- render ----------
+function render(){
+  const fs = $("fStage").value, q = ($("fSearch").value||"").toLowerCase();
+  const open = leads.filter(l=>l.stage!=="Won" && l.stage!=="Lost");
+  const due = open.filter(l=>l.nextFollowUp && l.nextFollowUp<=todayStr())
+                  .sort((a,b)=>(a.nextFollowUp||"").localeCompare(b.nextFollowUp||""));
+
+  $("stTotal").textContent = open.length;
+  $("stDue").textContent = due.length;
+  $("stHot").textContent = open.filter(l=>l.stage==="Quote Sent"||l.stage==="Negotiation").length;
+  $("stWonV").textContent = fmtINR(leads.filter(l=>l.stage==="Won").reduce((s,l)=>s+l.budget,0));
+  $("stPipeV").textContent = fmtINR(open.reduce((s,l)=>s+l.budget,0));
+  $("dueBadge").textContent = due.length;
+
+  // due list
+  const dl = $("dueList");
+  dl.innerHTML = due.length ? "" : '<div class="empty">Nothing due. Nice.</div>';
+  due.forEach(l=>{
+    const overdue = l.nextFollowUp < todayStr();
+    const div = document.createElement("div");
+    div.className = "due-item" + (overdue?"":" today");
+    div.innerHTML = `
+      <div>
+        <div class="who">${esc(l.name)} <span class="stage-pill ${stClass(l.stage)}">${esc(l.stage)}</span></div>
+        <div class="meta">${overdue?"⚠ Overdue since ":"Due "}${esc(l.nextFollowUp)} · ${esc(l.service||"")}</div>
+      </div>
+      <div style="display:flex;gap:6px;align-items:center">
+        <a class="btn-wa" target="_blank" rel="noopener" href="${waLink(l)}">💬 WhatsApp</a>
+        <button class="icon-btn" title="Mark contacted today" onclick="markDone('${l.id}')">✅</button>
+      </div>`;
+    dl.appendChild(div);
+  });
+
+  // table
+  const rows = leads
+    .filter(l=>!fs || l.stage===fs)
+    .filter(l=>!q || [l.name,l.phone,l.notes,l.service].join(" ").toLowerCase().includes(q))
+    .sort((a,b)=>(b.dateAdded||"").localeCompare(a.dateAdded||""));
+  const tb = $("tbody"); tb.innerHTML="";
+  $("emptyRow").style.display = rows.length?"none":"block";
+  rows.forEach(l=>{
+    const nf = l.nextFollowUp||"";
+    const nfCls = nf && nf<todayStr() ? "overdue" : nf===todayStr() ? "todaytx" : "";
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><b>${esc(l.name)}</b><div style="font-size:.72rem;color:var(--muted)">${esc(l.source||"")}</div></td>
+      <td class="hide-m">${esc(l.phone||"")}</td>
+      <td><select class="stage-pill ${stClass(l.stage)}" onchange="changeStage('${l.id}',this.value)">
+        ${STAGES.map(s=>`<option ${s===l.stage?"selected":""}>${s}</option>`).join("")}</select></td>
+      <td class="${nfCls}">${esc(nf)||"—"}</td>
+      <td class="hide-m">${esc(l.service||"")}</td>
+      <td class="hide-m">${l.budget?fmtINR(l.budget):"—"}</td>
+      <td style="white-space:nowrap">
+        <a class="btn-wa" target="_blank" rel="noopener" href="${waLink(l)}">💬</a>
+        <button class="icon-btn" title="Edit" onclick="openLeadModal('${l.id}')">✏️</button>
+        <button class="icon-btn" title="Delete" onclick="delLead('${l.id}')">🗑</button>
+      </td>`;
+    tb.appendChild(tr);
+  });
+}
+
+function waLink(l){
+  const phone = String(l.phone||"").replace(/[^\d]/g,"");
+  const msg = (TEMPLATES[l.stage]||TEMPLATES["New"]).replace(/{name}/g, (l.name||"").split(" ")[0]);
+  return `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+}
+
+// ---------- actions ----------
+function openLeadModal(id){
+  $("mId").value = id||"";
+  $("leadModalTitle").textContent = id?"Edit lead":"Add lead";
+  const l = leads.find(x=>x.id===id) || {stage:"New", nextFollowUp:todayStr(), source:"Meta Ad", service:"Full home interiors"};
+  $("mName").value=l.name||""; $("mPhone").value=l.phone||""; $("mSource").value=l.source||"Meta Ad";
+  $("mStage").value=l.stage||"New"; $("mService").value=l.service||""; $("mBudget").value=l.budget||"";
+  $("mNext").value=l.nextFollowUp||""; $("mLast").value=l.lastContact||""; $("mNotes").value=l.notes||"";
+  $("leadModal").classList.add("open");
+}
+function closeModal(id){ $(id).classList.remove("open"); }
+
+function saveLead(){
+  const name=$("mName").value.trim(), phone=$("mPhone").value.trim();
+  if(!name||!phone){ alert("Name and WhatsApp number are required."); return; }
+  const id = $("mId").value || ("L"+Date.now());
+  const lead = {
+    id, dateAdded: (leads.find(x=>x.id===id)||{}).dateAdded || todayStr(),
+    name, phone, source:$("mSource").value, service:$("mService").value.trim(),
+    budget:Number($("mBudget").value)||0, stage:$("mStage").value,
+    nextFollowUp:$("mNext").value, lastContact:$("mLast").value, notes:$("mNotes").value.trim()
+  };
+  const i = leads.findIndex(x=>x.id===id);
+  const action = i>=0 ? "update":"add";
+  if(i>=0) leads[i]=lead; else leads.push(lead);
+  closeModal("leadModal"); render();
+  pushLead(action, lead);
+}
+
+function changeStage(id, stage){
+  const l = leads.find(x=>x.id===id); if(!l) return;
+  l.stage = stage;
+  if(stage!=="Won"&&stage!=="Lost"&&!l.nextFollowUp) l.nextFollowUp = todayStr();
+  render(); pushLead("update", l);
+}
+
+function markDone(id){
+  const l = leads.find(x=>x.id===id); if(!l) return;
+  l.lastContact = todayStr();
+  const d = new Date(); d.setDate(d.getDate()+3);
+  l.nextFollowUp = d.toISOString().slice(0,10);
+  render(); pushLead("update", l);
+}
+
+function delLead(id){
+  if(!confirm("Delete this lead?")) return;
+  const l = leads.find(x=>x.id===id);
+  leads = leads.filter(x=>x.id!==id);
+  render(); pushLead("delete", l);
+}
+
+function openSettings(){ $("sUrl").value = scriptUrl; $("settingsModal").classList.add("open"); }
+function saveSettings(){
+  scriptUrl = $("sUrl").value.trim();
+  localStorage.setItem("olv_script_url", scriptUrl);
+  closeModal("settingsModal");
+  $("setupNote").classList.toggle("show", !scriptUrl);
+  loadLeads();
+}
 </script>
-</body></html>
+</body>
+</html>
